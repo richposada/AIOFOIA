@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName":       { "value": "${AZURE_ENV_NAME}" },
+    "location":              { "value": "${AZURE_LOCATION}" },
+    "azureSearchEndpoint":   { "value": "${AZURE_SEARCH_ENDPOINT}" },
+    "azureSearchIndexName":  { "value": "${AZURE_SEARCH_INDEX_NAME}" },
+    "azureSearchApiKey":     { "value": "${AZURE_SEARCH_API_KEY}" }
+  }
+}

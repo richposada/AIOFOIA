@@ -1,0 +1,52 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.EntityFrameworkCore.Database.Command": "Information",
+      "Microsoft.EntityFrameworkCore.Update": "Debug",
+      "Microsoft.EntityFrameworkCore.ChangeTracking": "Debug"
+    }
+  },
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft.AspNetCore": "Warning",
+        "Microsoft.EntityFrameworkCore.Database.Command": "Information",
+        "Microsoft.EntityFrameworkCore.Update": "Debug",
+        "Microsoft.EntityFrameworkCore.ChangeTracking": "Debug"
+      }
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "FoiaDb": "Server=(localdb)\\MSSQLLocalDB;Database=Foia;Trusted_Connection=True;TrustServerCertificate=True"
+  },
+  "AzureOpenAI": {
+    "Endpoint": "https://foiafoundry.services.ai.azure.com/",
+    "Deployment": "gpt-5-mini-1",
+    "ApiKey": "3Uq3o5aCJHqBF8os13SOOzo3TXTN56hTfh1dOsAmRfTOclcSnRasJQQJ99CDACYeBjFXJ3w3AAAAACOGp1Hd"
+  },
+  "AzureSearch": {
+    "Endpoint": "https://foiasearch.search.windows.net",
+    "ApiKey": "kiNOhc5E6pE3JV9y8sLq6hGOHXNGaptLBrlOSxNQ7SAzSeDBfSbr",
+    "IndexName": "search-1777482037213",
+    "Fields": {
+      "Id": "id",
+      "Content": "content",
+      "FileName": "title",
+      "FileType": "metadata_storage_file_extension"
+    }
+
+  },
+  "AzureBlobStorage": {
+    "ConnectionString": "https://stgluyadvm6kjaw.blob.core.windows.net/foia-releases",
+    "AccountName": "stgluyadvm6kjaw ",
+    "ContainerName": "foia-releases",
+    "SasExpirationDays": 7
+  },
+  "Workflow": {
+    "MaxSearchResults": 3
+  }
+}

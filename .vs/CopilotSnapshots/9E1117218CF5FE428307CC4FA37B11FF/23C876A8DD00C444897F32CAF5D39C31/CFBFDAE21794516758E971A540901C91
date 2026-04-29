@@ -1,0 +1,39 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "Sqlite": "Data Source=foia.db"
+  },
+  "AzureOpenAI": {
+    "Endpoint": "",
+    "Deployment": "gpt-4o-mini",
+    "ApiKey": ""
+  },
+  "AzureSearch": {
+    "Endpoint": "",
+    "ApiKey": "",
+    "IndexName": "",
+    "Fields": {
+      "Id": "id",
+      "Content": "content",
+      "DocumentDate": "documentDate",
+      "FileName": "fileName",
+      "FileType": "fileType",
+      "SourceUri": "sourceUri"
+    }
+  },
+  "AzureBlobStorage": {
+    "ConnectionString": "",
+    "AccountName": "",
+    "ContainerName": "foia-releases",
+    "SasExpirationDays": 7
+  },
+  "Workflow": {
+    "MaxSearchResults": 10
+  }
+}

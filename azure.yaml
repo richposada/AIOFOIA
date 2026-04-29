@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: foia-agent
+metadata:
+  template: foia-agent@1.0.0
+
+services:
+  foia-api:
+    project: ./src/FoiaProcessor.Api
+    language: dotnet
+    host: containerapp
+    docker:
+      path: ./Dockerfile
+      context: ../..

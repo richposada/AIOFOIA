@@ -1,0 +1,237 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\temp-foia-dir\\foia-agent\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|solutionrelative:src\\foiaprocessor.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{865D703A-73D3-4B90-AE15-F5FC5DA31964}|src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.data\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{865D703A-73D3-4B90-AE15-F5FC5DA31964}|src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj|solutionrelative:src\\foiaprocessor.data\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.mcptools\\servers\\caseserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|solutionrelative:src\\foiaprocessor.mcptools\\servers\\caseserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.agents\\agents\\packagingreleaseagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|solutionrelative:src\\foiaprocessor.agents\\agents\\packagingreleaseagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.agents\\workflow\\workflowhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|solutionrelative:src\\foiaprocessor.agents\\workflow\\workflowhostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.agents\\workflow\\foiaworkflowrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|solutionrelative:src\\foiaprocessor.agents\\workflow\\foiaworkflowrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.mcptools\\servers\\searchserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|solutionrelative:src\\foiaprocessor.mcptools\\servers\\searchserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|solutionrelative:src\\foiaprocessor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.agents\\agents\\redactionagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|solutionrelative:src\\foiaprocessor.agents\\agents\\redactionagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.agents\\agents\\searchagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{046B6265-A86F-414C-8094-D4B1FA120727}|src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj|solutionrelative:src\\foiaprocessor.agents\\agents\\searchagent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|solutionrelative:src\\foiaprocessor.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|c:\\temp-foia-dir\\foia-agent\\src\\foiaprocessor.mcptools\\servers\\blobstorageserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C3FE1B4-1436-48C4-A084-66D32BFAF2CF}|src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj|solutionrelative:src\\foiaprocessor.mcptools\\servers\\blobstorageserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 228,
+          "SelectedChildIndex": 11,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{55f480fa-fbef-4386-8c1c-ea8d10c9f542}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "RST:0:0:{f1975ed1-fac2-9ac9-e41e-cfd6a774f744}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SearchServer.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\SearchServer.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.McpTools\\Servers\\SearchServer.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\SearchServer.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.McpTools\\Servers\\SearchServer.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAiwD4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T14:30:15.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\Program.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\Program.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\Program.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Api\\Program.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAABUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T19:24:51.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Data\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Data\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Data\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Data\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAwwA4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T19:24:50.818Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BlobStorageServer.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\BlobStorageServer.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.McpTools\\Servers\\BlobStorageServer.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\BlobStorageServer.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.McpTools\\Servers\\BlobStorageServer.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAABOwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T21:37:01.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CaseServer.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\CaseServer.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.McpTools\\Servers\\CaseServer.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.McpTools\\Servers\\CaseServer.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.McpTools\\Servers\\CaseServer.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAqwBUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T18:56:40.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsettings.Development.json",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\appsettings.Development.json",
+              "RelativeToolTip": "src\\FoiaProcessor.Api\\appsettings.Development.json",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACYAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-29T18:41:33.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RedactionAgent.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAmwEYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T18:31:45.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PackagingReleaseAgent.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T20:55:02.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WorkflowHostedService.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Workflow\\WorkflowHostedService.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Workflow\\WorkflowHostedService.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Workflow\\WorkflowHostedService.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Workflow\\WorkflowHostedService.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAIwCsAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T20:59:45.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FoiaWorkflowRunner.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Workflow\\FoiaWorkflowRunner.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Workflow\\FoiaWorkflowRunner.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Workflow\\FoiaWorkflowRunner.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Workflow\\FoiaWorkflowRunner.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAAAHQAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T18:05:54.025Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsettings.json",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\appsettings.json",
+              "RelativeToolTip": "src\\FoiaProcessor.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-29T20:28:02.508Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SearchAgent.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\SearchAgent.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\SearchAgent.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\SearchAgent.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\SearchAgent.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAiwJEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T16:56:57.833Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

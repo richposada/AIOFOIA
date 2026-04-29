@@ -1,0 +1,103 @@
+// Mirrors REST DTOs from contracts/rest-api.md
+export type Counts = {
+    documentsFound: number;
+    documentsPendingReview: number;
+    documentsApproved: number;
+    documentsRejected: number;
+};
+
+export type Release = {
+    status: "NotReady" | "Ready";
+    sasUrl: string | null;
+    sasExpiresAt: string | null;
+};
+
+export type AuditEvent = {
+    timestamp: string;
+    eventType: string;
+    message: string;
+    relatedDocumentId: string | null;
+    relatedDocumentFileName: string | null;
+};
+
+export type FoiaRequestStatus = {
+    id: string;
+    subject: string;
+    requestorFullName: string;
+    requestorEmail: string;
+    requestedStartDate: string;
+    requestedEndDate: string;
+    status: string;
+    submittedAt: string;
+    counts: Counts;
+    release: Release;
+    auditEvents: AuditEvent[];
+};
+
+export type SubmitFoiaRequest = {
+    subject: string;
+    description?: string;
+    requestedStartDate: string;
+    requestedEndDate: string;
+    requestorFullName: string;
+    requestorOrganization?: string;
+    requestorEmail: string;
+    requestorPhone?: string;
+    requestorMailingAddress?: string;
+};
+
+export type SubmitFoiaResponse = {
+    id: string;
+    status: string;
+    submittedAt: string;
+};
+
+export type ValidationProblem = {
+    title: string;
+    status: number;
+    errors: Record<string, string[]>;
+};
+
+export type DocumentSummary = {
+    id: string;
+    fileName: string;
+    fileType: string;
+    redactionStatus: string;
+    reviewStatus: string;
+    redactionCount: number;
+};
+
+export type DocumentsList = { requestId: string; documents: DocumentSummary[] };
+
+export type DocumentRedaction = {
+    id: string;
+    piiType: string;
+    originalText: string;
+    replacementText: string;
+    startOffset: number | null;
+    endOffset: number | null;
+    pageNumber: number | null;
+    confidence: number | null;
+    detectionSource: string;
+    reviewerApproved: boolean | null;
+};
+
+export type DocumentReview = {
+    id: string;
+    foiaRequestId: string;
+    fileName: string;
+    originalContent: string;
+    redactedContent: string | null;
+    redactions: DocumentRedaction[];
+    reviewStatus: string;
+};
+
+export type ReleasePackage = {
+    requestId: string;
+    status: "NotReady" | "Ready";
+    zipBlobName?: string;
+    blobContainerName?: string;
+    sasUrl?: string;
+    sasExpiresAt?: string;
+    createdAt?: string;
+};

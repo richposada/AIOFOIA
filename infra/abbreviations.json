@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/bicep-registry-modules/main/avm/utl/types/avm-common-types/version.json",
+  "abbreviations": {
+    "containerAppsEnvironment":     "cae-",
+    "containerApp":                 "ca-",
+    "containerRegistry":            "cr",
+    "logAnalyticsWorkspace":        "log-",
+    "managedIdentity":              "id-",
+    "storageAccount":               "st",
+    "openAi":                       "oai-",
+    "resourceGroup":                "rg-"
+  }
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.DocumentsController",
+    "Method": "Approve",
+    "RelativePath": "api/documents/{id}/approve",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "FoiaProcessor.Api.Contracts.ApproveDocumentRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.DocumentsController",
+    "Method": "Reject",
+    "RelativePath": "api/documents/{id}/reject",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "FoiaProcessor.Api.Contracts.RejectDocumentRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.DocumentsController",
+    "Method": "GetReview",
+    "RelativePath": "api/documents/{id}/review",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.FoiaRequestsController",
+    "Method": "Submit",
+    "RelativePath": "api/foiarequests",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FoiaProcessor.Api.Contracts.SubmitFoiaRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.FoiaRequestsController",
+    "Method": "Get",
+    "RelativePath": "api/foiarequests/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.FoiaRequestsController",
+    "Method": "ApproveRelease",
+    "RelativePath": "api/foiarequests/{id}/approve-release",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.FoiaRequestsController",
+    "Method": "ListDocuments",
+    "RelativePath": "api/foiarequests/{id}/documents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FoiaProcessor.Api.Controllers.FoiaRequestsController",
+    "Method": "GetRelease",
+    "RelativePath": "api/foiarequests/{id}/release",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

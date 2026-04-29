@@ -1,0 +1,102 @@
+using DotNetEnv;
+using FoiaProcessor.Agents;
+using FoiaProcessor.Data;
+using FoiaProcessor.Data.Audit;
+using FoiaProcessor.McpTools.Hosting;
+using FoiaProcessor.McpTools.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using Serilog;
+
+// Load .env from the project directory if present (local dev convenience).
+Env.TraversePath().Load();
+
+var builder = WebApplication.CreateBuilder(args);
+
+// -------- Serilog (T017) --------
+builder.Host.UseSerilog((ctx, services, lc) => lc
+    .ReadFrom.Configuration(ctx.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext()
+    .WriteTo.Console(
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}")
+    .WriteTo.Debug(
+        outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Message:lj} {Properties:j}{NewLine}{Exception}"));
+
+// -------- Options binding (T014) --------
+builder.Services.Configure<AzureOpenAIOptions>(builder.Configuration.GetSection(AzureOpenAIOptions.SectionName));
+builder.Services.Configure<AzureSearchOptions>(builder.Configuration.GetSection(AzureSearchOptions.SectionName));
+builder.Services.Configure<AzureBlobStorageOptions>(builder.Configuration.GetSection(AzureBlobStorageOptions.SectionName));
+builder.Services.Configure<WorkflowOptions>(builder.Configuration.GetSection(WorkflowOptions.SectionName));
+
+// -------- Data + audit --------
+builder.Services.AddFoiaData(builder.Configuration);
+builder.Services.AddScoped<IAuditWriter, AuditWriter>();
+
+// -------- MCP tools --------
+builder.Services.AddFoiaMcpTools();
+
+// -------- Agents + workflow --------
+builder.Services.AddFoiaAgents();
+
+// -------- Web --------
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// -------- Database initialization (T025) --------
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<FoiaDbContext>();
+    db.Database.Migrate();
+}
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseSerilogRequestLogging();
+
+app.UseExceptionHandler(errApp => errApp.Run(async ctx =>
+{
+    ctx.Response.StatusCode = StatusCodes.Status500InternalServerError;
+    ctx.Response.ContentType = "application/json";
+    var traceId = System.Diagnostics.Activity.Current?.Id ?? ctx.TraceIdentifier;
+    var feature = ctx.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+    var detail = feature?.Error.Message ?? "Internal server error.";
+    var payload = System.Text.Json.JsonSerializer.Serialize(new
+    {
+        title = "Internal server error.",
+        status = 500,
+        detail,
+        traceId,
+    });
+    await ctx.Response.WriteAsync(payload);
+}));
+
+// -------- Static files / SPA fallback --------
+var wwwroot = Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+if (Directory.Exists(wwwroot))
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+}
+
+app.MapControllers();
+
+// SPA fallback to index.html (only when wwwroot exists).
+if (Directory.Exists(wwwroot))
+{
+    app.MapFallbackToFile("index.html", new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(wwwroot),
+    });
+}
+
+app.Run();
+
+public partial class Program { }

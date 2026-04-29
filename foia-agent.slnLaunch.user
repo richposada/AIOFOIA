@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
