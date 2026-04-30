@@ -140,6 +140,7 @@ public class FoiaRequestsController : ControllerBase
         var dto = new FoiaRequestStatusDto(
             request.Id,
             request.Subject,
+            request.Description,
             request.RequestorFullName,
             request.RequestorEmail,
             request.RequestedStartDate,

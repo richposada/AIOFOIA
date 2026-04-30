@@ -23,6 +23,7 @@ export type AuditEvent = {
 export type FoiaRequestStatus = {
     id: string;
     subject: string;
+    description?: string | null;
     requestorFullName: string;
     requestorEmail: string;
     requestedStartDate: string;
