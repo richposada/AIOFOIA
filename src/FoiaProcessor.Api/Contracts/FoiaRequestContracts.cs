@@ -44,6 +44,7 @@ public record AuditEventDto(
 public record FoiaRequestStatusDto(
     Guid Id,
     string Subject,
+    string? Description,
     string RequestorFullName,
     string RequestorEmail,
     DateOnly RequestedStartDate,
