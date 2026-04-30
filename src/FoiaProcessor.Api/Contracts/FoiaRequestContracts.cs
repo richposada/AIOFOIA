@@ -16,6 +16,13 @@ public record SubmitFoiaRequestResponseDto(
     string Status,
     DateTime SubmittedAt);
 
+public record FoiaRequestSummaryDto(
+    Guid Id,
+    string Subject,
+    string RequestorFullName,
+    string Status,
+    DateTime SubmittedAt);
+
 public record CountsDto(
     int DocumentsFound,
     int DocumentsPendingReview,

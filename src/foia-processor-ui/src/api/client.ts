@@ -2,6 +2,7 @@ import type {
     DocumentReview,
     DocumentsList,
     FoiaRequestStatus,
+    FoiaRequestSummary,
     ReleasePackage,
     SubmitFoiaRequest,
     SubmitFoiaResponse,
@@ -35,6 +36,12 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const submitFoiaRequest = (dto: SubmitFoiaRequest) =>
     request<SubmitFoiaResponse>("/api/foiarequests", { method: "POST", body: JSON.stringify(dto) });
+
+export const listFoiaRequests = (take = 10) =>
+    request<FoiaRequestSummary[]>(`/api/foiarequests?take=${take}`);
+
+export const listPendingReviewRequests = () =>
+    request<FoiaRequestSummary[]>(`/api/foiarequests/pending-review`);
 
 export const getFoiaRequestStatus = (id: string) =>
     request<FoiaRequestStatus>(`/api/foiarequests/${id}`);

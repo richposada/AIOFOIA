@@ -52,6 +52,14 @@ export type SubmitFoiaResponse = {
     submittedAt: string;
 };
 
+export type FoiaRequestSummary = {
+    id: string;
+    subject: string;
+    requestorFullName: string;
+    status: string;
+    submittedAt: string;
+};
+
 export type ValidationProblem = {
     title: string;
     status: number;
