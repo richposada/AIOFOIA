@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FoiaProcessor.McpTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba6944976fa1d794f4bc6f47e6e8b9ac8530dc4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b86059e00053690df40b6df535bf1319b8e8668")]
 [assembly: System.Reflection.AssemblyProductAttribute("FoiaProcessor.McpTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FoiaProcessor.McpTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
