@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\FoiaProcessor.Api.props" />
-</Project>
