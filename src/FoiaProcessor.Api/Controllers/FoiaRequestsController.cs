@@ -62,6 +62,41 @@ public class FoiaRequestsController : ControllerBase
         return Ok(new SubmitFoiaRequestResponseDto(created.CaseId, created.Status, submittedAt));
     }
 
+    [HttpGet]
+    public async Task<IActionResult> List([FromQuery] int take, CancellationToken ct)
+    {
+        var clamped = Math.Clamp(take <= 0 ? 10 : take, 1, 100);
+        var summaries = await _db.FoiaRequests
+            .AsNoTracking()
+            .OrderByDescending(r => r.SubmittedAt)
+            .Take(clamped)
+            .Select(r => new FoiaRequestSummaryDto(
+                r.Id,
+                r.Subject,
+                r.RequestorFullName,
+                r.Status.ToString(),
+                r.SubmittedAt))
+            .ToListAsync(ct);
+        return Ok(summaries);
+    }
+
+    [HttpGet("pending-review")]
+    public async Task<IActionResult> ListPendingReview(CancellationToken ct)
+    {
+        var summaries = await _db.FoiaRequests
+            .AsNoTracking()
+            .Where(r => r.Status == RequestStatus.PendingHumanReview)
+            .OrderByDescending(r => r.SubmittedAt)
+            .Select(r => new FoiaRequestSummaryDto(
+                r.Id,
+                r.Subject,
+                r.RequestorFullName,
+                r.Status.ToString(),
+                r.SubmittedAt))
+            .ToListAsync(ct);
+        return Ok(summaries);
+    }
+
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
