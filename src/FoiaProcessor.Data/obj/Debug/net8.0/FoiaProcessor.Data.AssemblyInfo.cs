@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FoiaProcessor.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21ec4cd30534b256d81541139a77d65b707f5382")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7d30534cbae5f88ee9e19fc6292b915b65837db")]
 [assembly: System.Reflection.AssemblyProductAttribute("FoiaProcessor.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FoiaProcessor.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

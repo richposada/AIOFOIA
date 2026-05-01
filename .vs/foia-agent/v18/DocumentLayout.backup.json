@@ -58,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 228,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -83,30 +83,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PackagingReleaseAgent.cs",
-              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
-              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
-              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
-              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T20:55:02.72Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "RedactionAgent.cs",
-              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
-              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
-              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
-              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAmwEYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T18:31:45.635Z"
             },
             {
               "$type": "Document",
@@ -176,10 +152,34 @@
               "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsettings.Development.json",
               "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Api\\appsettings.Development.json",
               "RelativeToolTip": "src\\FoiaProcessor.Api\\appsettings.Development.json",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAACsAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACYAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-04-29T18:41:33.532Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RedactionAgent.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\RedactionAgent.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAmwEYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T18:31:45.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PackagingReleaseAgent.cs",
+              "DocumentMoniker": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "ToolTip": "C:\\temp-foia-dir\\foia-agent\\src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "RelativeToolTip": "src\\FoiaProcessor.Agents\\Agents\\PackagingReleaseAgent.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAAFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T20:55:02.72Z"
             },
             {
               "$type": "Document",
