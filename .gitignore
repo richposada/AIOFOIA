@@ -1,14 +1,22 @@
-# Local app settings (contain secrets)
-/appsettings.Development.json
-/src/FoiaProcessor.Api/appsettings.Development.json
-/src/FoiaProcessor.Api/appsettings.json
+###############################################################################
+# Secrets / local config
+###############################################################################
+appsettings.Development.json
+src/FoiaProcessor.Api/appsettings.json
+src/FoiaProcessor.Api/appsettings.Development.json
+src/FoiaProcessor.Api/appsettings.*.Development.json
+*.pfx
+*.publishsettings
+.env
+.env.*
+!.env.example
 
 ###############################################################################
-# .NET / Visual Studio / VS Code .gitignore
-# Based on https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
+# .NET / Visual Studio
+# Source: https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 ###############################################################################
 
-## User-specific files
+# User-specific files
 *.rsuser
 *.suo
 *.user
@@ -16,7 +24,9 @@
 *.sln.docstates
 *.userprefs
 
-## Build results
+# Build results
+[Bb]in/
+[Oo]bj/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -27,8 +37,6 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
-[Oo]bj/
 [Ll]og/
 [Ll]ogs/
 [Oo]ut/
@@ -36,55 +44,7 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
-## Visual Studio cache/options
-.vs/
-*.VC.db
-*.VC.VC.opendb
-*.psess
-*.vsp
-*.vspx
-*.sap
-
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
-.history/
-*.vsix
-# Visual Studio / user-specific files
-.vs/
-*.user
-*.suo
-
-## Test / coverage results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
-coverage*.json
-coverage*.xml
-coverage*.info
-*.coverage
-*.coveragexml
-
-## NuGet
-*.nupkg
-*.snupkg
-**/[Pp]ackages/*
-!**/[Pp]ackages/build/
-*.nuget.props
-*.nuget.targets
-
-## ASP.NET / scaffolding
-PublishScripts/
-ScaffoldingReadMe.txt
-StyleCopReport.xml
-
-## Build artifacts
+# Build artifacts
 *.pdb
 *.dll
 *.exe
@@ -99,17 +59,42 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
-*.tlh
-*.tli
 
-## ReSharper / JetBrains
-_ReSharper*/
-*.[Rr]e[Ss]harper
-*.DotSettings.user
-.idea/
-*.sln.iml
+# Visual Studio cache / options
+.vs/
+*.VC.db
+*.VC.VC.opendb
+*.psess
+*.vsp
+*.vspx
+*.sap
 
-## Publish
+# Test / coverage
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# ASP.NET / scaffolding
+PublishScripts/
+ScaffoldingReadMe.txt
+StyleCopReport.xml
+
+# Publish
 publish/
 *.[Pp]ublish.xml
 *.azurePubxml
@@ -118,27 +103,74 @@ publish/
 PublishProfiles/
 PublishProfiles/*.pubxml.user
 
-## Azure / Azd
+# JetBrains / Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+###############################################################################
+# VS Code
+###############################################################################
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+###############################################################################
+# Node / npm / pnpm / yarn
+###############################################################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.npm/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+###############################################################################
+# React / Vite / TypeScript
+###############################################################################
+dist/
+dist-ssr/
+build/
+.vite/
+*.local
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Vite generated timestamp configs
+vite.config.ts.timestamp-*
+vite.config.js.timestamp-*
+
+# Storybook / coverage / nyc
+storybook-static/
+coverage/
+.nyc_output/
+
+###############################################################################
+# Azure / azd
+###############################################################################
 .azure/
 
-## Rider
-.idea/
-
-## Others
+###############################################################################
+# OS / misc
+###############################################################################
+.DS_Store
+Thumbs.db
 *.bak
 *.swp
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
-*.pfx
-*.publishsettings
-node_modules/
-*.tsbuildinfo
-.DS_Store
-Thumbs.db
-
-src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.McpTools.pdb
-src/FoiaProcessor.Api/appsetting.Development.json
-.vs/foia-agent/copilot-chat/4a13f1ed/sessions/5e310117-17c6-4e05-a573-8bb38a1ba3ad
-src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.Agents.dll
-src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.Agents.dll
