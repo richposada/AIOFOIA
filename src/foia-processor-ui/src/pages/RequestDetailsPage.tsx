@@ -168,13 +168,22 @@ export default function RequestDetailsPage() {
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                    {status.status === "PendingHumanReview" && (
+                    {status.status === "PendingHumanReview" ? (
                         <Link
                             to={`/requests/${status.id}/review`}
                             className="inline-flex items-center rounded-md bg-indigo-500 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-400"
                         >
                             Review Documents &rarr;
                         </Link>
+                    ) : (
+                        status.counts.documentsFound > 0 && (
+                            <Link
+                                to={`/requests/${status.id}/review`}
+                                className="inline-flex items-center rounded-md border border-midnight-700 bg-midnight-900/60 px-4 py-2 text-sm font-semibold text-midnight-100 hover:border-midnight-600 hover:text-white"
+                            >
+                                View Documents &rarr;
+                            </Link>
+                        )
                     )}
                     {canApproveRelease && (
                         <button
