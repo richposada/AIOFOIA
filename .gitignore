@@ -138,3 +138,7 @@ node_modules/
 Thumbs.db
 
 src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.McpTools.pdb
+src/FoiaProcessor.Api/appsetting.Development.json
+.vs/foia-agent/copilot-chat/4a13f1ed/sessions/5e310117-17c6-4e05-a573-8bb38a1ba3ad
+src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.Agents.dll
+src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.Agents.dll

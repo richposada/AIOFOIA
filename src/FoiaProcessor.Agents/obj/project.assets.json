@@ -3931,11 +3931,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
+      "projectUniqueName": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
       "projectName": "FoiaProcessor.Agents",
-      "projectPath": "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
+      "projectPath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
       "packagesPath": "C:\\Users\\riposada\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.Agents\\obj\\",
+      "outputPath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Agents\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3957,11 +3957,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj": {
-              "projectPath": "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj"
+            "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj": {
+              "projectPath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Data\\FoiaProcessor.Data.csproj"
             },
-            "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj": {
-              "projectPath": "C:\\Users\\riposada\\source\\repos\\AIOFOIA\\src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj"
+            "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj": {
+              "projectPath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.McpTools\\FoiaProcessor.McpTools.csproj"
             }
           }
         }
