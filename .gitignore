@@ -174,3 +174,11 @@ Thumbs.db
 *.dbmdl
 *.dbproj.schemaview
 *.jfm
+
+###############################################################################
+# .NET build output (catch-all for any project under src/)
+# The generic [Bb]in/ and [Oo]bj/ rules above already cover these, but the
+# explicit globs below make intent obvious for FoiaProcessor.* projects.
+###############################################################################
+src/**/bin/
+src/**/obj/
