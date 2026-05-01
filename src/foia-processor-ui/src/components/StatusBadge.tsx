@@ -39,7 +39,7 @@ export default function StatusBadge({ status }: Props) {
         : palette[status] ?? "bg-midnight-700/60 text-midnight-100 ring-midnight-600";
     return (
         <span
-            className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${cls}`}
+            className={`inline-flex shrink-0 items-center whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset ${cls}`}
             title={isActive ? "Actively processing" : undefined}
         >
             {isActive && (
