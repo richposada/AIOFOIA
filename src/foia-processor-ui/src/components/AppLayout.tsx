@@ -35,6 +35,9 @@ export default function AppLayout() {
                         <NavLink to="/submit" className={navClass}>
                             Submit New Request
                         </NavLink>
+                        <NavLink to="/admin" className={navClass}>
+                            Admin
+                        </NavLink>
                     </div>
                 </nav>
             </header>
