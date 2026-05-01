@@ -217,18 +217,6 @@ export default function RequestDetailsPage() {
                     <dl className="mt-4 divide-y divide-midnight-800 text-sm">
                         <Field label="Subject" value={status.subject} />
                         <Field
-                            label="Description"
-                            value={
-                                status.description ? (
-                                    <span className="whitespace-pre-wrap text-left">
-                                        {status.description}
-                                    </span>
-                                ) : (
-                                    <span className="text-midnight-400">—</span>
-                                )
-                            }
-                        />
-                        <Field
                             label="Submitted"
                             value={formatDate(status.submittedAt)}
                         />
@@ -238,7 +226,16 @@ export default function RequestDetailsPage() {
                                 status.requestedStartDate
                             )} — ${formatDateOnly(status.requestedEndDate)}`}
                         />
-                        <Field label="Current status" value={status.status} />
+                        <div className="py-2.5">
+                            <dt className="text-midnight-400">Description</dt>
+                            <dd className="mt-2 whitespace-pre-wrap text-left text-midnight-100">
+                                {status.description ? (
+                                    status.description
+                                ) : (
+                                    <span className="text-midnight-400">—</span>
+                                )}
+                            </dd>
+                        </div>
                     </dl>
                 </section>
 
@@ -261,6 +258,43 @@ export default function RequestDetailsPage() {
                                 >
                                     {status.requestorEmail}
                                 </a>
+                            }
+                        />
+                        <Field
+                            label="Organization"
+                            value={
+                                status.requestorOrganization ? (
+                                    status.requestorOrganization
+                                ) : (
+                                    <span className="text-midnight-400">—</span>
+                                )
+                            }
+                        />
+                        <Field
+                            label="Phone"
+                            value={
+                                status.requestorPhone ? (
+                                    <a
+                                        href={`tel:${status.requestorPhone}`}
+                                        className="text-indigo-300 hover:text-indigo-200"
+                                    >
+                                        {status.requestorPhone}
+                                    </a>
+                                ) : (
+                                    <span className="text-midnight-400">—</span>
+                                )
+                            }
+                        />
+                        <Field
+                            label="Mailing address"
+                            value={
+                                status.requestorMailingAddress ? (
+                                    <span className="whitespace-pre-wrap text-left">
+                                        {status.requestorMailingAddress}
+                                    </span>
+                                ) : (
+                                    <span className="text-midnight-400">—</span>
+                                )
                             }
                         />
                     </dl>

@@ -26,6 +26,9 @@ export type FoiaRequestStatus = {
     description?: string | null;
     requestorFullName: string;
     requestorEmail: string;
+    requestorOrganization?: string | null;
+    requestorPhone?: string | null;
+    requestorMailingAddress?: string | null;
     requestedStartDate: string;
     requestedEndDate: string;
     status: string;
