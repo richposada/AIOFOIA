@@ -3,6 +3,7 @@ import type {
     DocumentsList,
     FoiaRequestStatus,
     FoiaRequestSummary,
+    PagedFoiaRequests,
     ReleasePackage,
     SubmitFoiaRequest,
     SubmitFoiaResponse,
@@ -42,6 +43,11 @@ export const listFoiaRequests = (take = 10) =>
 
 export const listAllFoiaRequests = () =>
     request<FoiaRequestSummary[]>(`/api/foiarequests?take=100`);
+
+export const listFoiaRequestsPaged = (skip: number, take: number) =>
+    request<PagedFoiaRequests>(
+        `/api/foiarequests/paged?skip=${skip}&take=${take}`
+    );
 
 export const deleteFoiaRequest = (id: string) =>
     request<void>(`/api/foiarequests/${id}`, { method: "DELETE" });

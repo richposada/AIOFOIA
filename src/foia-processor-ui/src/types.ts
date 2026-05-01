@@ -61,6 +61,13 @@ export type FoiaRequestSummary = {
     submittedAt: string;
 };
 
+export type PagedFoiaRequests = {
+    total: number;
+    skip: number;
+    take: number;
+    items: FoiaRequestSummary[];
+};
+
 export type ValidationProblem = {
     title: string;
     status: number;

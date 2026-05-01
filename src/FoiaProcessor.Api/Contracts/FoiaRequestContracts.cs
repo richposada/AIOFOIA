@@ -23,6 +23,12 @@ public record FoiaRequestSummaryDto(
     string Status,
     DateTime SubmittedAt);
 
+public record PagedFoiaRequestsDto(
+    int Total,
+    int Skip,
+    int Take,
+    IReadOnlyList<FoiaRequestSummaryDto> Items);
+
 public record CountsDto(
     int DocumentsFound,
     int DocumentsPendingReview,

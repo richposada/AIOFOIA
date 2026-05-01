@@ -90,6 +90,32 @@ public class FoiaRequestsController : ControllerBase
         return Ok(summaries);
     }
 
+    [HttpGet("paged")]
+    public async Task<IActionResult> ListPaged(
+        [FromQuery] int skip,
+        [FromQuery] int take,
+        CancellationToken ct)
+    {
+        var clampedTake = Math.Clamp(take <= 0 ? 25 : take, 1, 200);
+        var clampedSkip = Math.Max(0, skip);
+
+        var query = _db.FoiaRequests.AsNoTracking();
+        var total = await query.CountAsync(ct);
+        var items = await query
+            .OrderByDescending(r => r.SubmittedAt)
+            .Skip(clampedSkip)
+            .Take(clampedTake)
+            .Select(r => new FoiaRequestSummaryDto(
+                r.Id,
+                r.Subject,
+                r.RequestorFullName,
+                r.Status.ToString(),
+                r.SubmittedAt))
+            .ToListAsync(ct);
+
+        return Ok(new PagedFoiaRequestsDto(total, clampedSkip, clampedTake, items));
+    }
+
     [HttpGet("pending-review")]
     public async Task<IActionResult> ListPendingReview(CancellationToken ct)
     {
