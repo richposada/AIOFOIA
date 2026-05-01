@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { approveDocument, getDocumentReview, rejectDocument } from "../api/client";
 import type { DocumentReview } from "../types";
+import StatusBadge from "../components/StatusBadge";
 
 function highlight(text: string, ranges: { start: number; end: number; piiType: string }[]) {
     if (!ranges.length) return [text];
@@ -10,7 +11,15 @@ function highlight(text: string, ranges: { start: number; end: number; piiType: 
     let cursor = 0;
     sorted.forEach((r, i) => {
         if (r.start > cursor) out.push(text.slice(cursor, r.start));
-        out.push(<mark key={i} title={r.piiType}>{text.slice(r.start, r.end)}</mark>);
+        out.push(
+            <mark
+                key={i}
+                title={r.piiType}
+                className="rounded bg-amber-400/30 px-0.5 text-amber-100"
+            >
+                {text.slice(r.start, r.end)}
+            </mark>
+        );
         cursor = r.end;
     });
     if (cursor < text.length) out.push(text.slice(cursor));
@@ -27,7 +36,9 @@ export default function DocumentReviewPage() {
 
     useEffect(() => {
         if (!documentId) return;
-        getDocumentReview(documentId).then(setDoc).catch((e) => setError((e as Error).message));
+        getDocumentReview(documentId)
+            .then(setDoc)
+            .catch((e) => setError((e as Error).message));
     }, [documentId]);
 
     async function onApprove() {
@@ -60,58 +71,192 @@ export default function DocumentReviewPage() {
         }
     }
 
-    if (error) return <div className="page"><p className="field-error">{error}</p></div>;
-    if (!doc) return <div className="page"><p>Loading…</p></div>;
+    const backLink = (
+        <Link
+            to={`/requests/${id}/review`}
+            className="inline-flex items-center text-sm font-medium text-indigo-300 transition-colors hover:text-indigo-200"
+        >
+            &larr; Back to review list
+        </Link>
+    );
+
+    if (!doc && error) {
+        return (
+            <div className="space-y-4">
+                {backLink}
+                <div
+                    role="alert"
+                    className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"
+                >
+                    {error}
+                </div>
+            </div>
+        );
+    }
+
+    if (!doc) {
+        return (
+            <div className="space-y-4">
+                {backLink}
+                <div className="h-48 animate-pulse rounded-2xl border border-midnight-800 bg-midnight-900/40" />
+            </div>
+        );
+    }
 
     const originalRanges = doc.redactions
         .filter((r) => r.startOffset !== null && r.endOffset !== null)
         .map((r) => ({ start: r.startOffset!, end: r.endOffset!, piiType: r.piiType }));
 
     return (
-        <div className="page">
-            <h1>{doc.fileName}</h1>
-            <p>
-                <Link to={`/requests/${id}/review`}>← Back to review list</Link>
-                {" · "}Status: <strong>{doc.reviewStatus}</strong>
-                {" · "}Redactions: <strong>{doc.redactions.length}</strong>
-            </p>
+        <div className="space-y-6">
+            {backLink}
 
-            <div className="review-grid">
-                <div>
-                    <h2>Original (highlighted)</h2>
-                    <div className="review-pane">{highlight(doc.originalContent, originalRanges)}</div>
+            {error && (
+                <div
+                    role="alert"
+                    className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"
+                >
+                    {error}
                 </div>
-                <div>
-                    <h2>Redacted</h2>
-                    <div className="review-pane">{doc.redactedContent ?? "(not yet generated)"}</div>
+            )}
+
+            {/* Header */}
+            <header className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="min-w-0">
+                        <p className="text-xs uppercase tracking-wide text-midnight-400">
+                            Document
+                        </p>
+                        <h1 className="mt-1 break-all text-2xl font-semibold text-white">
+                            {doc.fileName}
+                        </h1>
+                        <p className="mt-2 text-sm text-midnight-300">
+                            {doc.redactions.length} redaction
+                            {doc.redactions.length === 1 ? "" : "s"} detected
+                        </p>
+                    </div>
+                    <StatusBadge status={doc.reviewStatus} />
                 </div>
-            </div>
+            </header>
 
-            <h2>Findings</h2>
-            <table className="docs">
-                <thead><tr><th>Type</th><th>Original</th><th>Replacement</th><th>Source</th><th>Confidence</th></tr></thead>
-                <tbody>
-                    {doc.redactions.map((r) => (
-                        <tr key={r.id}>
-                            <td>{r.piiType}</td>
-                            <td><code>{r.originalText}</code></td>
-                            <td><code>{r.replacementText}</code></td>
-                            <td>{r.detectionSource}</td>
-                            <td>{r.confidence?.toFixed(2) ?? "—"}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {/* Content panes */}
+            <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <article className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-white">
+                        Original (highlighted)
+                    </h2>
+                    <div className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-midnight-800 bg-midnight-950/60 p-4 font-mono text-xs leading-relaxed text-midnight-100">
+                        {highlight(doc.originalContent, originalRanges)}
+                    </div>
+                </article>
+                <article className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-white">
+                        Redacted
+                    </h2>
+                    <div className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-midnight-800 bg-midnight-950/60 p-4 font-mono text-xs leading-relaxed text-midnight-100">
+                        {doc.redactedContent ?? (
+                            <span className="text-midnight-400">
+                                (not yet generated)
+                            </span>
+                        )}
+                    </div>
+                </article>
+            </section>
 
-            <h2>Decision</h2>
-            <label>
-                Comments {doc.reviewStatus === "Approved" ? "(optional)" : "(required if rejecting)"}
-                <textarea value={comments} onChange={(e) => setComments(e.target.value)} />
-            </label>
-            <p>
-                <button onClick={onApprove} disabled={busy} style={{ marginRight: 8 }}>Approve</button>
-                <button onClick={onReject} disabled={busy}>Reject</button>
-            </p>
+            {/* Findings */}
+            <section className="rounded-2xl border border-midnight-800 bg-midnight-900/60 shadow-card">
+                <header className="flex items-center justify-between border-b border-midnight-800 px-6 py-4">
+                    <h2 className="text-base font-semibold text-white">
+                        Findings
+                    </h2>
+                    <span className="text-xs text-midnight-400">
+                        {doc.redactions.length} item
+                        {doc.redactions.length === 1 ? "" : "s"}
+                    </span>
+                </header>
+                {doc.redactions.length === 0 ? (
+                    <p className="px-6 py-6 text-sm text-midnight-400">
+                        No redactions detected.
+                    </p>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full divide-y divide-midnight-800 text-sm">
+                            <thead className="bg-midnight-950/60 text-left text-xs uppercase tracking-wide text-midnight-400">
+                                <tr>
+                                    <th className="px-4 py-3 font-medium">Type</th>
+                                    <th className="px-4 py-3 font-medium">Original</th>
+                                    <th className="px-4 py-3 font-medium">Replacement</th>
+                                    <th className="px-4 py-3 font-medium">Source</th>
+                                    <th className="px-4 py-3 font-medium">Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-midnight-800 text-midnight-100">
+                                {doc.redactions.map((r) => (
+                                    <tr key={r.id}>
+                                        <td className="px-4 py-3 font-medium text-white">
+                                            {r.piiType}
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            <code className="rounded bg-midnight-950/60 px-1.5 py-0.5 font-mono text-xs text-amber-200">
+                                                {r.originalText}
+                                            </code>
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            <code className="rounded bg-midnight-950/60 px-1.5 py-0.5 font-mono text-xs text-emerald-200">
+                                                {r.replacementText}
+                                            </code>
+                                        </td>
+                                        <td className="px-4 py-3 text-midnight-300">
+                                            {r.detectionSource}
+                                        </td>
+                                        <td className="px-4 py-3 text-midnight-300">
+                                            {r.confidence?.toFixed(2) ?? "—"}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </section>
+
+            {/* Decision */}
+            <section className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
+                <h2 className="text-base font-semibold text-white">Decision</h2>
+                <label className="mt-4 block text-sm text-midnight-200">
+                    <span className="block">
+                        Comments{" "}
+                        <span className="text-xs text-midnight-400">
+                            {doc.reviewStatus === "Approved"
+                                ? "(optional)"
+                                : "(required if rejecting)"}
+                        </span>
+                    </span>
+                    <textarea
+                        value={comments}
+                        onChange={(e) => setComments(e.target.value)}
+                        rows={4}
+                        className="mt-2 block w-full rounded-md border border-midnight-700 bg-midnight-950/60 px-3 py-2 text-sm text-white placeholder-midnight-500 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400"
+                        placeholder="Add any notes or rejection reason…"
+                    />
+                </label>
+                <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-midnight-800 pt-6">
+                    <button
+                        onClick={onReject}
+                        disabled={busy}
+                        className="inline-flex items-center rounded-md border border-rose-500/40 bg-rose-500/10 px-4 py-2 text-sm font-semibold text-rose-200 hover:bg-rose-500/20 disabled:opacity-60"
+                    >
+                        Reject
+                    </button>
+                    <button
+                        onClick={onApprove}
+                        disabled={busy}
+                        className="inline-flex items-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-400 disabled:opacity-60"
+                    >
+                        {busy ? "Working…" : "Approve"}
+                    </button>
+                </div>
+            </section>
         </div>
     );
 }
