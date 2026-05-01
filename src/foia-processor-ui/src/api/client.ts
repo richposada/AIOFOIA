@@ -40,6 +40,12 @@ export const submitFoiaRequest = (dto: SubmitFoiaRequest) =>
 export const listFoiaRequests = (take = 10) =>
     request<FoiaRequestSummary[]>(`/api/foiarequests?take=${take}`);
 
+export const listAllFoiaRequests = () =>
+    request<FoiaRequestSummary[]>(`/api/foiarequests?take=100`);
+
+export const deleteFoiaRequest = (id: string) =>
+    request<void>(`/api/foiarequests/${id}`, { method: "DELETE" });
+
 export const listPendingReviewRequests = () =>
     request<FoiaRequestSummary[]>(`/api/foiarequests/pending-review`);
 

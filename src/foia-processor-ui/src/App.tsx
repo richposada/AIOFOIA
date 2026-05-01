@@ -7,6 +7,7 @@ import StatusPage from "./pages/StatusPage";
 import RequestDetailsPage from "./pages/RequestDetailsPage";
 import ReviewListPage from "./pages/ReviewListPage";
 import DocumentReviewPage from "./pages/DocumentReviewPage";
+import AdminPage from "./pages/AdminPage";
 
 export default function App() {
     return (
@@ -23,6 +24,7 @@ export default function App() {
                         path="/requests/:id/documents/:documentId"
                         element={<DocumentReviewPage />}
                     />
+                    <Route path="/admin" element={<AdminPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>
             </Routes>

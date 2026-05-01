@@ -21,3 +21,6 @@ public record GetReleasePackageStatusOutput(
     string? ZipBlobName,
     string? SasUrl,
     DateTime? SasExpiresAt);
+
+public record DeleteBlobInput(string ContainerName, string BlobName);
+public record DeleteBlobOutput(bool Deleted);

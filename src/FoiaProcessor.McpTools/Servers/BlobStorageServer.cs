@@ -95,6 +95,21 @@ public class BlobStorageServer
     public virtual Task<GetReleasePackageStatusOutput> GetReleasePackageStatusAsync(GetReleasePackageStatusInput input, CancellationToken ct = default)
         => Task.FromResult(new GetReleasePackageStatusOutput(null, null, null, null));
 
+    public virtual async Task<DeleteBlobOutput> DeleteBlobAsync(DeleteBlobInput input, CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(input.ContainerName) || string.IsNullOrWhiteSpace(input.BlobName))
+        {
+            return new DeleteBlobOutput(false);
+        }
+
+        var container = GetContainerClient(input.ContainerName);
+        var blob = container.GetBlobClient(input.BlobName);
+        var response = await blob.DeleteIfExistsAsync(
+            DeleteSnapshotsOption.IncludeSnapshots,
+            cancellationToken: ct);
+        return new DeleteBlobOutput(response.Value);
+    }
+
     /// <summary>
     /// Returns the configured connection string only when it actually looks
     /// like one (i.e. semicolon-delimited name=value pairs). A URL or any

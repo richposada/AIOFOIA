@@ -16,15 +16,25 @@ public class FoiaRequestsController : ControllerBase
 {
     private readonly CaseServer _case;
     private readonly ReviewServer _review;
+    private readonly BlobStorageServer _blob;
     private readonly FoiaDbContext _db;
     private readonly WorkflowQueue _queue;
+    private readonly ILogger<FoiaRequestsController> _logger;
 
-    public FoiaRequestsController(CaseServer caseServer, ReviewServer reviewServer, FoiaDbContext db, WorkflowQueue queue)
+    public FoiaRequestsController(
+        CaseServer caseServer,
+        ReviewServer reviewServer,
+        BlobStorageServer blobServer,
+        FoiaDbContext db,
+        WorkflowQueue queue,
+        ILogger<FoiaRequestsController> logger)
     {
         _case = caseServer;
         _review = reviewServer;
+        _blob = blobServer;
         _db = db;
         _queue = queue;
+        _logger = logger;
     }
 
     [HttpPost]
@@ -202,6 +212,45 @@ public class FoiaRequestsController : ControllerBase
         await _queue.EnqueueAsync(id, ct);
 
         return Ok(new ApproveReleaseResponseDto(id, nameof(RequestStatus.ApprovedForRelease), DateTime.UtcNow));
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var request = await _db.FoiaRequests
+            .Include(r => r.ReleasePackage)
+            .FirstOrDefaultAsync(r => r.Id == id, ct);
+        if (request is null)
+        {
+            return NotFound(new { title = "Not Found", status = 404, detail = $"FoiaRequest {id} not found." });
+        }
+
+        // Best-effort: delete the release package blob from storage before
+        // removing the parent row. Storage failures are logged but do not
+        // block the database delete (the row would otherwise be orphaned
+        // pointing at storage we cannot reach).
+        if (request.ReleasePackage is { } pkg
+            && !string.IsNullOrWhiteSpace(pkg.BlobContainerName)
+            && !string.IsNullOrWhiteSpace(pkg.ZipBlobName))
+        {
+            try
+            {
+                await _blob.DeleteBlobAsync(
+                    new DeleteBlobInput(pkg.BlobContainerName, pkg.ZipBlobName), ct);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex,
+                    "Failed to delete release blob {Container}/{Blob} for request {RequestId}; continuing with DB delete.",
+                    pkg.BlobContainerName, pkg.ZipBlobName, id);
+            }
+        }
+
+        // FK cascade (configured in FoiaDbContext) removes Documents, Redactions,
+        // ReviewTasks, ReleasePackage, and AuditEvents when the parent is deleted.
+        _db.FoiaRequests.Remove(request);
+        await _db.SaveChangesAsync(ct);
+        return NoContent();
     }
 
     [HttpGet("{id:guid}/release")]
