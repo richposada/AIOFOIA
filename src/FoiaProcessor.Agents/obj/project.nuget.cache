@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LDJB7baH4LQ=",
+  "dgSpecHash": "e6rHWBvZrL8=",
   "success": true,
-  "projectFilePath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
+  "projectFilePath": "C:\\Users\\riposada\\source\\repos\\AIExpo\\AIOFOIA\\src\\FoiaProcessor.Agents\\FoiaProcessor.Agents.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\riposada\\.nuget\\packages\\azure.ai.openai\\2.9.0-beta.1\\azure.ai.openai.2.9.0-beta.1.nupkg.sha512",
     "C:\\Users\\riposada\\.nuget\\packages\\azure.core\\1.53.0\\azure.core.1.53.0.nupkg.sha512",

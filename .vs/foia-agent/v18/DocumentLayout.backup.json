@@ -1,14 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\",
+  "WorkspaceRootPath": "C:\\Users\\riposada\\source\\repos\\AIExpo\\AIOFOIA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\users\\riposada\\source\\repos\\clean-foia\\aiofoia\\src\\foiaprocessor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\users\\riposada\\source\\repos\\aiexpo\\aiofoia\\src\\foiaprocessor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|solutionrelative:src\\foiaprocessor.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|c:\\users\\riposada\\source\\repos\\clean-foia\\aiofoia\\src\\foiaprocessor.api\\appsetting.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A7D475D0-544F-4F36-B8E6-F4A7F41ED7AA}|src\\FoiaProcessor.Api\\FoiaProcessor.Api.csproj|solutionrelative:src\\foiaprocessor.api\\appsetting.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +17,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 228,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,26 +45,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsetting.Development.json",
-              "DocumentMoniker": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsetting.Development.json",
-              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsetting.Development.json",
-              "ToolTip": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsetting.Development.json",
-              "RelativeToolTip": "src\\FoiaProcessor.Api\\appsetting.Development.json",
-              "ViewState": "AgIAABYAAAAAAAAAAAAxwDQAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\riposada\\source\\repos\\AIExpo\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\riposada\\source\\repos\\AIExpo\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json*",
+              "RelativeToolTip": "src\\FoiaProcessor.Api\\appsettings.json*",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-01T12:59:52.106Z",
+              "WhenOpened": "2026-05-01T13:34:35.148Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json",
-              "RelativeDocumentMoniker": "src\\FoiaProcessor.Api\\appsettings.json",
-              "ToolTip": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json*",
-              "RelativeToolTip": "src\\FoiaProcessor.Api\\appsettings.json*",
-              "ViewState": "AgIAABAAAAAAAAAAAAAxwBoAAAA7AAAAAAAAAA==",
+              "RelativeDocumentMoniker": "..\\..\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\riposada\\source\\repos\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json",
+              "RelativeToolTip": "..\\..\\clean-foia\\AIOFOIA\\src\\FoiaProcessor.Api\\appsettings.json",
+              "ViewState": "AgIAABYAAAAAAAAAAAAxwDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-05-01T12:59:44.382Z",
               "EditorCaption": ""
