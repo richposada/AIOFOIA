@@ -54,6 +54,10 @@ msbuild.wrn
 !.vscode/*.code-snippets
 .history/
 *.vsix
+# Visual Studio / user-specific files
+.vs/
+*.user
+*.suo
 
 ## Test / coverage results
 [Tt]est[Rr]esult*/
@@ -133,3 +137,4 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+src/FoiaProcessor.Agents/bin/Debug/net8.0/FoiaProcessor.McpTools.pdb
