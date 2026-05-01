@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { deleteFoiaRequest, listAllFoiaRequests } from "../api/client";
+import { deleteFoiaRequest, listFoiaRequestsPaged } from "../api/client";
 import StatusBadge from "../components/StatusBadge";
 import type { FoiaRequestSummary } from "../types";
+
+const PAGE_SIZE = 10;
 
 const dateFmt = new Intl.DateTimeFormat(undefined, {
     dateStyle: "medium",
@@ -11,20 +13,35 @@ const dateFmt = new Intl.DateTimeFormat(undefined, {
 
 export default function AdminPage() {
     const [items, setItems] = useState<FoiaRequestSummary[] | null>(null);
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(0); // 0-based
     const [error, setError] = useState<string | null>(null);
     const [deletingId, setDeletingId] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
 
-    function load() {
+    function load(targetPage: number) {
         setError(null);
-        setItems(null);
-        listAllFoiaRequests()
-            .then(setItems)
-            .catch((e) => setError((e as Error).message));
+        setLoading(true);
+        listFoiaRequestsPaged(targetPage * PAGE_SIZE, PAGE_SIZE)
+            .then((res) => {
+                setItems(res.items);
+                setTotal(res.total);
+                setPage(targetPage);
+            })
+            .catch((e) => setError((e as Error).message))
+            .finally(() => setLoading(false));
     }
 
     useEffect(() => {
-        load();
+        load(0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    const canPrev = page > 0;
+    const canNext = page < totalPages - 1;
+    const startIdx = total === 0 ? 0 : page * PAGE_SIZE + 1;
+    const endIdx = Math.min(total, page * PAGE_SIZE + (items?.length ?? 0));
 
     async function handleDelete(req: FoiaRequestSummary) {
         const ok = window.confirm(
@@ -39,7 +56,10 @@ export default function AdminPage() {
         setError(null);
         try {
             await deleteFoiaRequest(req.id);
-            setItems((prev) => (prev ? prev.filter((r) => r.id !== req.id) : prev));
+            // Reload current page; if it just emptied, step back one.
+            const remainingOnPage = (items?.length ?? 1) - 1;
+            const nextPage = remainingOnPage === 0 && page > 0 ? page - 1 : page;
+            load(nextPage);
         } catch (e) {
             setError(`Failed to delete ${req.id}: ${(e as Error).message}`);
         } finally {
@@ -49,24 +69,6 @@ export default function AdminPage() {
 
     return (
         <div>
-            <div className="mb-8 flex items-end justify-between gap-4">
-                <div>
-                    <h1 className="text-3xl font-semibold text-white">Admin</h1>
-                    <p className="mt-1 text-sm text-midnight-300">
-                        Manage all FOIA requests in the system. Deleting a request also
-                        removes its documents, redactions, review tasks, release package,
-                        and audit events.
-                    </p>
-                </div>
-                <button
-                    type="button"
-                    onClick={load}
-                    className="rounded-md border border-midnight-700 bg-midnight-900/60 px-3 py-2 text-sm font-medium text-midnight-100 transition-colors hover:bg-midnight-800"
-                >
-                    Refresh
-                </button>
-            </div>
-
             {error && (
                 <div
                     role="alert"
@@ -164,6 +166,39 @@ export default function AdminPage() {
                             </tbody>
                         </table>
                     </div>
+
+                    <nav
+                        aria-label="Pagination"
+                        className="flex items-center justify-between gap-4 border-t border-midnight-800 bg-midnight-900/40 px-6 py-3 text-sm text-midnight-300"
+                    >
+                        <div>
+                            Showing <span className="font-medium text-white">{startIdx}</span>
+                            &ndash;<span className="font-medium text-white">{endIdx}</span> of{" "}
+                            <span className="font-medium text-white">{total}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="hidden sm:inline">
+                                Page <span className="font-medium text-white">{page + 1}</span> of{" "}
+                                <span className="font-medium text-white">{totalPages}</span>
+                            </span>
+                            <button
+                                type="button"
+                                onClick={() => canPrev && load(page - 1)}
+                                disabled={!canPrev || loading}
+                                className="rounded-md border border-midnight-700 bg-midnight-900/60 px-3 py-1.5 text-sm font-medium text-midnight-100 transition-colors hover:bg-midnight-800 disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                &larr; Previous
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => canNext && load(page + 1)}
+                                disabled={!canNext || loading}
+                                className="rounded-md border border-midnight-700 bg-midnight-900/60 px-3 py-1.5 text-sm font-medium text-midnight-100 transition-colors hover:bg-midnight-800 disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Next &rarr;
+                            </button>
+                        </div>
+                    </nav>
                 </div>
             )}
         </div>
