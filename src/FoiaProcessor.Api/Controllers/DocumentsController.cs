@@ -81,4 +81,18 @@ public class DocumentsController : ControllerBase
 
         return Ok(new RejectDocumentResponseDto(id, nameof(ReviewStatus.ManualHandling), DateTime.UtcNow));
     }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    {
+        var doc = await _db.Documents
+            .Include(d => d.Redactions)
+            .FirstOrDefaultAsync(d => d.Id == id, ct);
+        if (doc is null) return NotFound(new { title = "Not Found", status = 404 });
+
+        _db.Documents.Remove(doc);
+        await _db.SaveChangesAsync(ct);
+
+        return NoContent();
+    }
 }

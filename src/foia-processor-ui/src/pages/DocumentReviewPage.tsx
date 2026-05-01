@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { approveDocument, getDocumentReview, rejectDocument } from "../api/client";
+import {
+    approveDocument,
+    deleteDocument,
+    getDocumentReview,
+    rejectDocument,
+} from "../api/client";
 import type { DocumentReview } from "../types";
 import StatusBadge from "../components/StatusBadge";
 
@@ -63,6 +68,23 @@ export default function DocumentReviewPage() {
         setBusy(true);
         try {
             await rejectDocument(documentId, comments);
+            navigate(`/requests/${id}/review`);
+        } catch (e) {
+            setError((e as Error).message);
+        } finally {
+            setBusy(false);
+        }
+    }
+
+    async function onDelete() {
+        if (!documentId || !doc) return;
+        const ok = window.confirm(
+            `Remove document "${doc.fileName}"? This cannot be undone.`
+        );
+        if (!ok) return;
+        setBusy(true);
+        try {
+            await deleteDocument(documentId);
             navigate(`/requests/${id}/review`);
         } catch (e) {
             setError((e as Error).message);
@@ -241,6 +263,13 @@ export default function DocumentReviewPage() {
                     />
                 </label>
                 <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-midnight-800 pt-6">
+                    <button
+                        onClick={onDelete}
+                        disabled={busy}
+                        className="mr-auto inline-flex items-center rounded-md border border-rose-500/40 bg-rose-500/10 px-4 py-2 text-sm font-semibold text-rose-200 hover:bg-rose-500/20 disabled:opacity-60"
+                    >
+                        Remove document
+                    </button>
                     <button
                         onClick={onReject}
                         disabled={busy}

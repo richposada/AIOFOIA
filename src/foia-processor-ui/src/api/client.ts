@@ -76,6 +76,9 @@ export const rejectDocument = (id: string, comments: string) =>
         body: JSON.stringify({ comments }),
     });
 
+export const deleteDocument = (id: string) =>
+    request<void>(`/api/documents/${id}`, { method: "DELETE" });
+
 export const approveRelease = (id: string) =>
     request<{ id: string; status: string; approvedAt: string }>(
         `/api/foiarequests/${id}/approve-release`,
