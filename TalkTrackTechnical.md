@@ -123,11 +123,23 @@ The runner runs in a background `Channel<Guid>` consumer hosted in the API proce
   - `SaveDocuments()` (no args, idempotent)
   - `MarkNoDocumentsFound()` — escape hatch when search returns empty.
 
-### Agent 3 — RedactionAgent (deterministic, **no LLM at this layer**)
+### Agent 3 — RedactionAgent (deterministic orchestration, **LLM lives in the tool**)
 
 - **Pattern:** plain C# loop. Iterates documents in `RedactionStatus.NotStarted`, calls `RedactionServer.DetectPiiAsync` then `RedactTextAsync` then `CaseServer.CaseSaveRedactionResultsAsync`.
-- **Why no agent loop?** The detect → redact → save sequence has zero decision points. Wrapping it in a `ChatClientAgent` would give the model an opportunity to skip a step or hallucinate — and provides no value. **The LLM call lives *inside* `RedactionServer.DetectPiiAsync`** (Azure OpenAI structured outputs returning `PiiFinding[]`, augmented by deterministic regex for SSN / email / phone / credit card).
+- **Why no agent loop?** The detect → redact → save sequence has zero decision points. Wrapping it in a `ChatClientAgent` would give the model an opportunity to skip a step or hallucinate — and provides no value. Orchestration stays deterministic; **the LLM call is pushed *down* into `RedactionServer.DetectPiiAsync`**.
+- **What the LLM actually does (`useAi: true`):** `DetectPiiAsync` runs in two layers:
+  1. **Deterministic regex pass** for the unambiguous, regular-grammar PII: `Email`, `Phone`, `SSN`, `DateOfBirth`. Cheap, fast, 100% recall on well-formed values, zero LLM cost.
+  2. **LLM pass for the *fuzzy* categories that regex can't catch** — `Name`, `Address`, `FinancialId`. The server builds a `gpt-4o-mini` chat completion with:
+     - A tightly-scoped system prompt: *"You extract PII from text. Return ONLY a JSON object `{"findings":[{piiType, originalText, startOffset, endOffset, confidence}]}`. Do not include emails, phones, SSNs, or DOBs (handled separately). Use exact substring offsets."*
+     - **Structured output enforcement** via `ChatResponseFormat.CreateJsonObjectFormat()` — the API guarantees parseable JSON, no regex-cleanup of model prose.
+     - `Temperature = 0` for determinism across reruns.
+     - The full document body as the user message.
+  3. The JSON is parsed, each finding is tagged with `DetectionSource = "ai"` and a model-supplied `confidence` score (regex findings are tagged `"regex"`, no confidence). The two lists are merged, sorted by offset, and returned as one stream of `PiiFinding`s.
+- **Why split it that way?** Regex is the wrong tool for "is this a person's name" but the right tool for "does this match `\d{3}-\d{2}-\d{4}`". The LLM is the wrong tool for high-volume regular patterns (token cost, latency, occasional miss) but the right tool for context-dependent entities. Splitting the workload plays each to its strength and keeps the LLM prompt focused on a small, well-defined task.
+- **Failure isolation.** The AI branch is wrapped in `try/catch`: if Azure OpenAI is down, throttled, or misconfigured, the warning is logged and **redaction continues with regex findings only**. The pipeline never fails closed because of a model outage.
+- **Downstream:** `RedactTextAsync` applies findings **right-to-left** so offsets stay valid as substitutions shrink/grow the text. Each PII type maps to a stable label (`[REDACTED NAME]`, `[REDACTED EMAIL]`, etc.) — what the reviewer sees in the green pane on the Document Review page.
 - **Concurrency hygiene:** `_db.ChangeTracker.Clear()` between documents prevents per-doc tracked entities from bleeding into the next iteration's `SaveChanges` (which previously caused EF concurrency conflicts when the agent was resumed mid-batch).
+
 
 ### Agent 4 — HumanReviewCoordinatorAgent (LLM-driven, single decision)
 
