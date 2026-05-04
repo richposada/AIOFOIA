@@ -37,6 +37,22 @@ public class BlobStorageServer
         return Task.FromResult(new CreateZipPackageOutput(Convert.ToBase64String(ms.ToArray()), input.Files.Count));
     }
 
+    public virtual Task<CreateZipPackageOutput> CreateZipPackageBinaryAsync(CreateZipPackageBinaryInput input, CancellationToken ct = default)
+    {
+        using var ms = new MemoryStream();
+        using (var zip = new ZipArchive(ms, ZipArchiveMode.Create, leaveOpen: true))
+        {
+            foreach (var f in input.Files)
+            {
+                var entry = zip.CreateEntry(f.FileName, CompressionLevel.Optimal);
+                using var es = entry.Open();
+                es.Write(f.Content, 0, f.Content.Length);
+            }
+        }
+        ms.Position = 0;
+        return Task.FromResult(new CreateZipPackageOutput(Convert.ToBase64String(ms.ToArray()), input.Files.Count));
+    }
+
     public virtual async Task<UploadToBlobStorageOutput> UploadToBlobStorageAsync(UploadToBlobStorageInput input, CancellationToken ct = default)
     {
         var container = GetContainerClient(input.ContainerName);
