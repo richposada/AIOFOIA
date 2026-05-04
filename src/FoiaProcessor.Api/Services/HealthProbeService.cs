@@ -259,7 +259,6 @@ public sealed class HealthProbeService
                     sw.ElapsedMilliseconds, null, "Missing configuration");
             }
 
-            var props = await client.GetPropertiesAsync(ct).ConfigureAwait(false);
             var container = client.GetBlobContainerClient(_blobOpts.ContainerName);
             var exists = await container.ExistsAsync(ct).ConfigureAwait(false);
             sw.Stop();
@@ -269,7 +268,6 @@ public sealed class HealthProbeService
                 ["accountName"] = accountName,
                 ["containerName"] = _blobOpts.ContainerName,
                 ["containerExists"] = exists.Value,
-                ["defaultServiceVersion"] = props.Value.DefaultServiceVersion,
             };
 
             if (!exists.Value)
