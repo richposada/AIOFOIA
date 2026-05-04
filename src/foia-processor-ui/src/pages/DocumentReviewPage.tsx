@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
     approveDocument,
@@ -38,6 +38,27 @@ export default function DocumentReviewPage() {
     const [comments, setComments] = useState("");
     const [busy, setBusy] = useState(false);
     const navigate = useNavigate();
+
+    // Synchronized scrolling for the original/redacted panes.
+    const originalPaneRef = useRef<HTMLDivElement | null>(null);
+    const redactedPaneRef = useRef<HTMLDivElement | null>(null);
+    const syncingRef = useRef(false);
+
+    function syncScroll(
+        source: HTMLDivElement | null,
+        target: HTMLDivElement | null,
+    ) {
+        if (!source || !target) return;
+        if (syncingRef.current) return;
+        syncingRef.current = true;
+        const sMax = source.scrollHeight - source.clientHeight;
+        const tMax = target.scrollHeight - target.clientHeight;
+        const ratio = sMax > 0 ? source.scrollTop / sMax : 0;
+        target.scrollTop = tMax * ratio;
+        requestAnimationFrame(() => {
+            syncingRef.current = false;
+        });
+    }
 
     useEffect(() => {
         if (!documentId) return;
@@ -163,21 +184,33 @@ export default function DocumentReviewPage() {
 
             {/* Content panes */}
             <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <article className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
-                    <h2 className="text-base font-semibold text-white">
+                <article className="rounded-2xl border border-emerald-700/40 bg-emerald-950/40 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-emerald-100">
                         Original (highlighted)
                     </h2>
-                    <div className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-midnight-800 bg-midnight-950/60 p-4 font-mono text-xs leading-relaxed text-midnight-100">
+                    <div
+                        ref={originalPaneRef}
+                        onScroll={() =>
+                            syncScroll(originalPaneRef.current, redactedPaneRef.current)
+                        }
+                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-emerald-700/40 bg-emerald-950/60 p-4 font-mono text-xs leading-relaxed text-emerald-50"
+                    >
                         {highlight(doc.originalContent, originalRanges)}
                     </div>
                 </article>
-                <article className="rounded-2xl border border-midnight-800 bg-midnight-900/60 p-6 shadow-card">
-                    <h2 className="text-base font-semibold text-white">
+                <article className="rounded-2xl border border-rose-700/40 bg-rose-950/40 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-rose-100">
                         Redacted
                     </h2>
-                    <div className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-midnight-800 bg-midnight-950/60 p-4 font-mono text-xs leading-relaxed text-midnight-100">
+                    <div
+                        ref={redactedPaneRef}
+                        onScroll={() =>
+                            syncScroll(redactedPaneRef.current, originalPaneRef.current)
+                        }
+                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-rose-700/40 bg-rose-950/60 p-4 font-mono text-xs leading-relaxed text-rose-50"
+                    >
                         {doc.redactedContent ?? (
-                            <span className="text-midnight-400">
+                            <span className="text-rose-300/70">
                                 (not yet generated)
                             </span>
                         )}
