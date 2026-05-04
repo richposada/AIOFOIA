@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { useMsal } from "@azure/msal-react";
 import logoUrl from "../assets/images/aiofoia-logo.png";
 
 const linkBase =
@@ -11,6 +12,13 @@ function navClass({ isActive }: { isActive: boolean }) {
 }
 
 export default function AppLayout() {
+    const { instance, accounts } = useMsal();
+    const account = accounts[0];
+
+    const handleSignOut = () => {
+        instance.logoutRedirect({ postLogoutRedirectUri: window.location.origin });
+    };
+
     return (
         <div className="min-h-screen bg-midnight-950 text-midnight-100">
             <header className="sticky top-0 z-10 border-b border-midnight-200 bg-white shadow-sm">
@@ -41,6 +49,23 @@ export default function AppLayout() {
                         <NavLink to="/system-health" className={navClass}>
                             System Health
                         </NavLink>
+                        {account && (
+                            <div className="ml-3 flex items-center gap-2 border-l border-midnight-200 pl-3">
+                                <span
+                                    className="text-sm font-medium text-midnight-700"
+                                    title={account.username}
+                                >
+                                    {account.name ?? account.username}
+                                </span>
+                                <button
+                                    type="button"
+                                    onClick={handleSignOut}
+                                    className="rounded-md border border-midnight-200 px-2 py-1 text-xs font-medium text-midnight-700 hover:bg-midnight-100"
+                                >
+                                    Sign out
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </nav>
             </header>

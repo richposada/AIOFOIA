@@ -4,8 +4,11 @@ using FoiaProcessor.Data;
 using FoiaProcessor.Data.Audit;
 using FoiaProcessor.McpTools.Hosting;
 using FoiaProcessor.McpTools.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Identity.Web;
+using Microsoft.OpenApi;
 using Serilog;
 
 // Load .env from the project directory if present (local dev convenience).
@@ -50,7 +53,28 @@ builder.Services.AddControllers()
             new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(o =>
+{
+    o.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Paste an Entra ID access token (without the 'Bearer ' prefix).",
+    });
+    o.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
+    {
+        { new OpenApiSecuritySchemeReference("Bearer"), new List<string>() },
+    });
+});
+
+// -------- Entra ID authentication --------
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -93,6 +117,9 @@ if (Directory.Exists(wwwroot))
     app.UseDefaultFiles();
     app.UseStaticFiles();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

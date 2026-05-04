@@ -4,12 +4,14 @@ using FoiaProcessor.Data;
 using FoiaProcessor.Data.Entities;
 using FoiaProcessor.McpTools.Contracts;
 using FoiaProcessor.McpTools.Servers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoiaProcessor.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/documents")]
 public class DocumentsController : ControllerBase
 {

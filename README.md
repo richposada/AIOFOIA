@@ -65,3 +65,43 @@ All side effects — DB writes, Azure AI Search calls, Azure OpenAI calls, Blob 
 are reached **only through the MCP-shaped servers** in `FoiaProcessor.McpTools` (CaseServer,
 SearchServer, RedactionServer, ReviewServer, BlobStorageServer), exposed to the LLM as
 `Microsoft.Extensions.AI.AIFunction` tools on each `ChatClientAgent`.
+
+## Authentication (Microsoft Entra ID)
+
+The SPA and API are protected by a single Entra ID app registration. Sign-in uses MSAL.js (PKCE
+auth-code flow) in the browser; the API validates JWT bearer tokens with
+`Microsoft.Identity.Web`. There is no role-based authorization — any signed-in user in the
+configured tenant can use the app.
+
+### One-time setup
+
+1. **Create the app registration** in the Microsoft Entra admin center:
+   - **Supported account types:** Accounts in this organizational directory only (single tenant).
+   - **Platform configuration:** add a **Single-page application** redirect URI for each origin
+     you sign in from. For local dev that is `http://localhost:5173` (Vite) and
+     `http://localhost:5080` (when the API serves the built SPA). For Azure, add the Container
+     App URL (e.g. `https://ca-foia-api-<token>.<region>.azurecontainerapps.io`).
+2. **Expose an API:** under **Expose an API** click **Add a scope**, accept the proposed
+   `api://{clientId}` URI, then add a scope named `access_as_user` (admin and user consent
+   enabled). The full scope value the SPA requests is `api://{clientId}/access_as_user`.
+3. **Capture IDs:** copy the **Application (client) ID** and **Directory (tenant) ID**.
+
+### Local development
+
+Set `AzureAd:TenantId` and `AzureAd:ClientId` in
+`src/FoiaProcessor.Api/appsettings.Development.json`. Restart the API; the SPA will fetch the
+config from `GET /api/config` on first load and trigger a redirect sign-in.
+
+### CI / Azure deployment
+
+Add two **GitHub Actions repository variables** (Settings → Secrets and variables → Actions →
+Variables):
+
+- `ENTRA_TENANT_ID` — the Directory (tenant) ID
+- `ENTRA_API_CLIENT_ID` — the Application (client) ID
+
+These flow through the deploy workflow into Bicep parameters and end up as
+`AzureAd__TenantId` / `AzureAd__ClientId` environment variables on the Container App. Leave
+them unset to deploy with auth disabled (the API will then return 401 on every request to an
+`[Authorize]` controller).
+
