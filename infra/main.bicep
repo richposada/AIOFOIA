@@ -51,6 +51,8 @@ var registryName         = take('${abbrs.containerRegistry}${resourceToken}', 50
 var managedIdentityName  = '${abbrs.managedIdentity}foia-${resourceToken}'
 var storageAccountName   = take('${abbrs.storageAccount}${resourceToken}', 24)
 var openAiName           = '${abbrs.openAi}${resourceToken}'
+var sqlServerName        = '${abbrs.sqlServer}foia-${resourceToken}'
+var sqlDatabaseName      = '${abbrs.sqlDatabase}foia'
 var releasesContainer    = 'foia-releases'
 
 // -------- Log Analytics --------
@@ -187,6 +189,74 @@ resource openAiUserRA 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
     }
 }
 
+// -------- Azure SQL (serverless, AAD-only auth) --------
+resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = {
+    name: sqlServerName
+    location: location
+    tags: tags
+    identity: {
+        type: 'UserAssigned'
+        userAssignedIdentities: {
+            '${managedIdentity.id}': {}
+        }
+    }
+    properties: {
+        version: '12.0'
+        publicNetworkAccess: 'Enabled'
+        minimalTlsVersion: '1.2'
+        primaryUserAssignedIdentityId: managedIdentity.id
+        administrators: {
+            administratorType: 'ActiveDirectory'
+            azureADOnlyAuthentication: true
+            login: managedIdentityName
+            sid: managedIdentity.properties.principalId
+            tenantId: subscription().tenantId
+            principalType: 'Application'
+        }
+    }
+}
+
+resource sqlServerAadOnly 'Microsoft.Sql/servers/azureADOnlyAuthentications@2023-08-01-preview' = {
+    parent: sqlServer
+    name: 'Default'
+    properties: {
+        azureADOnlyAuthentication: true
+    }
+}
+
+resource sqlAllowAzureServices 'Microsoft.Sql/servers/firewallRules@2023-08-01-preview' = {
+    parent: sqlServer
+    name: 'AllowAllAzureServices'
+    properties: {
+        startIpAddress: '0.0.0.0'
+        endIpAddress: '0.0.0.0'
+    }
+}
+
+resource sqlDatabase 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
+    parent: sqlServer
+    name: sqlDatabaseName
+    location: location
+    tags: tags
+    sku: {
+        name: 'GP_S_Gen5_1'
+        tier: 'GeneralPurpose'
+        family: 'Gen5'
+        capacity: 1
+    }
+    properties: {
+        collation: 'SQL_Latin1_General_CP1_CI_AS'
+        maxSizeBytes: 2147483648
+        autoPauseDelay: 60
+        minCapacity: json('0.5')
+        zoneRedundant: false
+        readScale: 'Disabled'
+        requestedBackupStorageRedundancy: 'Local'
+    }
+}
+
+var sqlConnectionString = 'Server=tcp:${sqlServer.properties.fullyQualifiedDomainName},1433;Initial Catalog=${sqlDatabaseName};Encrypt=True;TrustServerCertificate=False;Authentication=Active Directory Default;'
+
 // -------- Container Apps environment --------
 resource containerEnv 'Microsoft.App/managedEnvironments@2024-03-01' = {
     name: containerEnvName
@@ -257,6 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
                         { name: 'AzureBlobStorage__AccountName',   value: storage.name }
                         { name: 'AzureBlobStorage__ContainerName', value: releasesContainer }
                         { name: 'AZURE_CLIENT_ID',                 value: managedIdentity.properties.clientId }
+                        { name: 'ConnectionStrings__FoiaDb',       value: sqlConnectionString }
                     ]
                 }
             ]
@@ -271,6 +342,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         storageBlobDataContributorRA
         storageBlobDelegatorRA
         openAiUserRA
+        sqlDatabase
     ]
 }
 
@@ -286,3 +358,5 @@ output AZURE_STORAGE_ACCOUNT_NAME string = storage.name
 output AZURE_STORAGE_CONTAINER_NAME string = releasesContainer
 output AZURE_MANAGED_IDENTITY_CLIENT_ID string = managedIdentity.properties.clientId
 output SERVICE_FOIA_API_IDENTITY_PRINCIPAL_ID string = managedIdentity.properties.principalId
+output AZURE_SQL_SERVER_FQDN string = sqlServer.properties.fullyQualifiedDomainName
+output AZURE_SQL_DATABASE_NAME string = sqlDatabaseName

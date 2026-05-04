@@ -8,6 +8,8 @@
     "managedIdentity":              "id-",
     "storageAccount":               "st",
     "openAi":                       "oai-",
-    "resourceGroup":                "rg-"
+    "resourceGroup":                "rg-",
+    "sqlServer":                    "sql-",
+    "sqlDatabase":                  "sqldb-"
   }
 }
