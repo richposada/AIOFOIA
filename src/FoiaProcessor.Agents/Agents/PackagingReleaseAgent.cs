@@ -47,17 +47,21 @@ public class PackagingReleaseAgent
             new CaseUpdateStatusInput(requestId, nameof(RequestStatus.Packaging), "Building release package."),
             ct);
 
-        // 1. Build the zip from approved redacted documents.
+        // 1. Build the zip from approved redacted documents, rendering each as a PDF first.
         var docs = await _db.Documents
             .AsNoTracking()
             .Where(d => d.FoiaRequestId == requestId && d.ReviewStatus == ReviewStatus.Approved)
             .Select(d => new { d.FileName, Content = d.RedactedContent ?? d.OriginalContent })
             .ToListAsync(ct);
 
-        var entries = docs.Select(d => new ZipFileEntry(d.FileName, d.Content)).ToList();
-        var zip = await _blob.CreateZipPackageAsync(new CreateZipPackageInput(requestId, entries), ct);
+        var entries = docs
+            .Select(d => new ZipFileEntryBinary(
+                Path.ChangeExtension(d.FileName, ".pdf"),
+                PdfRenderer.Render(d.FileName, d.Content)))
+            .ToList();
+        var zip = await _blob.CreateZipPackageBinaryAsync(new CreateZipPackageBinaryInput(requestId, entries), ct);
         _logger.LogInformation(
-            "Packaging: built zip with {DocCount} document(s) for request {RequestId}.", entries.Count, requestId);
+            "Packaging: built zip with {DocCount} PDF document(s) for request {RequestId}.", entries.Count, requestId);
 
         // 2. Upload to blob storage.
         var blobName = $"{requestId}/release-{DateTime.UtcNow:yyyyMMddHHmmss}.zip";

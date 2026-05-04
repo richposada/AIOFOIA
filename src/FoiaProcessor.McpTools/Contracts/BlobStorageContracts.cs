@@ -4,6 +4,9 @@ public record ZipFileEntry(string FileName, string Content);
 public record CreateZipPackageInput(Guid CaseId, IReadOnlyList<ZipFileEntry> Files);
 public record CreateZipPackageOutput(string ZipBytesBase64, int FileCount);
 
+public record ZipFileEntryBinary(string FileName, byte[] Content);
+public record CreateZipPackageBinaryInput(Guid CaseId, IReadOnlyList<ZipFileEntryBinary> Files);
+
 public record UploadToBlobStorageInput(
     string ContainerName,
     string BlobName,
