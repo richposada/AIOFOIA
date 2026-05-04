@@ -184,8 +184,8 @@ export default function DocumentReviewPage() {
 
             {/* Content panes */}
             <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <article className="rounded-2xl border border-emerald-700/40 bg-emerald-950/40 p-6 shadow-card">
-                    <h2 className="text-base font-semibold text-emerald-100">
+                <article className="rounded-2xl border border-rose-700/40 bg-rose-950/40 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-rose-100">
                         Original (highlighted)
                     </h2>
                     <div
@@ -193,13 +193,13 @@ export default function DocumentReviewPage() {
                         onScroll={() =>
                             syncScroll(originalPaneRef.current, redactedPaneRef.current)
                         }
-                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-emerald-700/40 bg-emerald-950/60 p-4 font-mono text-xs leading-relaxed text-emerald-50"
+                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-rose-700/40 bg-rose-950/60 p-4 font-mono text-xs leading-relaxed text-rose-50"
                     >
                         {highlight(doc.originalContent, originalRanges)}
                     </div>
                 </article>
-                <article className="rounded-2xl border border-rose-700/40 bg-rose-950/40 p-6 shadow-card">
-                    <h2 className="text-base font-semibold text-rose-100">
+                <article className="rounded-2xl border border-emerald-700/40 bg-emerald-950/40 p-6 shadow-card">
+                    <h2 className="text-base font-semibold text-emerald-100">
                         Redacted
                     </h2>
                     <div
@@ -207,10 +207,10 @@ export default function DocumentReviewPage() {
                         onScroll={() =>
                             syncScroll(redactedPaneRef.current, originalPaneRef.current)
                         }
-                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-rose-700/40 bg-rose-950/60 p-4 font-mono text-xs leading-relaxed text-rose-50"
+                        className="mt-4 max-h-[480px] overflow-auto whitespace-pre-wrap rounded-lg border border-emerald-700/40 bg-emerald-950/60 p-4 font-mono text-xs leading-relaxed text-emerald-50"
                     >
                         {doc.redactedContent ?? (
-                            <span className="text-rose-300/70">
+                            <span className="text-emerald-300/70">
                                 (not yet generated)
                             </span>
                         )}
