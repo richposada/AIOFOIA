@@ -38,6 +38,9 @@ export default function AppLayout() {
                         <NavLink to="/admin" className={navClass}>
                             Admin
                         </NavLink>
+                        <NavLink to="/system-health" className={navClass}>
+                            System Health
+                        </NavLink>
                     </div>
                 </nav>
             </header>
