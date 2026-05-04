@@ -42,6 +42,12 @@ param sqlLocation string = location
 @description('Image tag for the foia-api container. Set by azd to the built image reference.')
 param foiaApiImage string = ''
 
+@description('Microsoft Entra tenant ID used to validate access tokens. Leave empty to disable auth (will fail at runtime if controllers require it).')
+param entraTenantId string = ''
+
+@description('Microsoft Entra app registration (client) ID for the API/SPA. Leave empty to disable auth.')
+param entraApiClientId string = ''
+
 // -------- Naming --------
 var abbrs = loadJsonContent('./abbreviations.json').abbreviations
 var resourceToken = uniqueString(subscription().id, resourceGroup().id, environmentName)
@@ -331,6 +337,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
                         { name: 'AzureBlobStorage__ContainerName', value: releasesContainer }
                         { name: 'AZURE_CLIENT_ID',                 value: managedIdentity.properties.clientId }
                         { name: 'ConnectionStrings__FoiaDb',       value: sqlConnectionString }
+                        { name: 'AzureAd__Instance',               value: 'https://login.microsoftonline.com/' }
+                        { name: 'AzureAd__TenantId',               value: entraTenantId }
+                        { name: 'AzureAd__ClientId',               value: entraApiClientId }
                     ]
                 }
             ]

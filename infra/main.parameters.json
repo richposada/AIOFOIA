@@ -7,6 +7,8 @@
     "sqlLocation":           { "value": "${AZURE_SQL_LOCATION=${AZURE_LOCATION}}" },
     "azureSearchEndpoint":   { "value": "${AZURE_SEARCH_ENDPOINT}" },
     "azureSearchIndexName":  { "value": "${AZURE_SEARCH_INDEX_NAME}" },
-    "azureSearchApiKey":     { "value": "${AZURE_SEARCH_API_KEY}" }
+    "azureSearchApiKey":     { "value": "${AZURE_SEARCH_API_KEY}" },
+    "entraTenantId":         { "value": "${ENTRA_TENANT_ID=}" },
+    "entraApiClientId":      { "value": "${ENTRA_API_CLIENT_ID=}" }
   }
 }

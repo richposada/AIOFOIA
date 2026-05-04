@@ -10,6 +10,7 @@ import type {
     SystemHealthReport,
     ValidationProblem,
 } from "../types";
+import { getAccessToken } from "../auth/msalConfig";
 
 const BASE = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/$/, "");
 
@@ -20,9 +21,21 @@ export class ApiValidationError extends Error {
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+    const headers = new Headers(init?.headers ?? {});
+    if (!headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
+    }
+    // Anonymous endpoints (config) must not get a bearer header — they may be
+    // hit before MSAL is even initialized.
+    if (path !== "/api/config") {
+        const token = await getAccessToken();
+        if (token) {
+            headers.set("Authorization", `Bearer ${token}`);
+        }
+    }
     const res = await fetch(`${BASE}${path}`, {
-        headers: { "Content-Type": "application/json" },
         ...init,
+        headers,
     });
     if (res.status === 400) {
         const problem = (await res.json()) as ValidationProblem;
