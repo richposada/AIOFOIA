@@ -36,6 +36,9 @@ param openAiModelName string = 'gpt-4o-mini'
 @description('OpenAI model version.')
 param openAiModelVersion string = '2024-07-18'
 
+@description('Azure region for the SQL logical server. Defaults to the resource location; override if SQL provisioning is restricted in that region.')
+param sqlLocation string = location
+
 @description('Image tag for the foia-api container. Set by azd to the built image reference.')
 param foiaApiImage string = ''
 
@@ -192,7 +195,7 @@ resource openAiUserRA 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 // -------- Azure SQL (serverless, AAD-only auth) --------
 resource sqlServer 'Microsoft.Sql/servers@2023-08-01-preview' = {
     name: sqlServerName
-    location: location
+    location: sqlLocation
     tags: tags
     identity: {
         type: 'UserAssigned'
@@ -236,7 +239,7 @@ resource sqlAllowAzureServices 'Microsoft.Sql/servers/firewallRules@2023-08-01-p
 resource sqlDatabase 'Microsoft.Sql/servers/databases@2023-08-01-preview' = {
     parent: sqlServer
     name: sqlDatabaseName
-    location: location
+    location: sqlLocation
     tags: tags
     sku: {
         name: 'GP_S_Gen5_1'
