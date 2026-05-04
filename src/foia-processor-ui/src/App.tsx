@@ -8,6 +8,7 @@ import RequestDetailsPage from "./pages/RequestDetailsPage";
 import ReviewListPage from "./pages/ReviewListPage";
 import DocumentReviewPage from "./pages/DocumentReviewPage";
 import AdminPage from "./pages/AdminPage";
+import SystemHealthPage from "./pages/SystemHealthPage";
 
 export default function App() {
     return (
@@ -25,6 +26,7 @@ export default function App() {
                         element={<DocumentReviewPage />}
                     />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/system-health" element={<SystemHealthPage />} />
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>
             </Routes>

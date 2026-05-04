@@ -1,4 +1,23 @@
 // Mirrors REST DTOs from contracts/rest-api.md
+
+export type HealthStatus = "Healthy" | "Degraded" | "Unhealthy";
+
+export type ComponentHealth = {
+    name: string;
+    category: string;
+    status: HealthStatus;
+    description?: string | null;
+    durationMs: number;
+    data?: Record<string, unknown> | null;
+    error?: string | null;
+};
+
+export type SystemHealthReport = {
+    status: HealthStatus;
+    timestamp: string;
+    components: ComponentHealth[];
+};
+
 export type Counts = {
     documentsFound: number;
     documentsPendingReview: number;

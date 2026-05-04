@@ -7,6 +7,7 @@ import type {
     ReleasePackage,
     SubmitFoiaRequest,
     SubmitFoiaResponse,
+    SystemHealthReport,
     ValidationProblem,
 } from "../types";
 
@@ -87,3 +88,6 @@ export const approveRelease = (id: string) =>
 
 export const getRelease = (id: string) =>
     request<ReleasePackage>(`/api/foiarequests/${id}/release`);
+
+export const getSystemHealth = () =>
+    request<SystemHealthReport>(`/api/health/detailed`);
